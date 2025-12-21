@@ -68,12 +68,19 @@ class Paladin_OT_ExportSetItemAdd(bpy.types.Operator):
             if item.uuid == collection_uuid:
                 self.report({'WARNING'}, f"Collection '{collection_name}' already in set {self.set_index + 1}.")
                 return {'CANCELLED'}
-        
+                
         item = export_set.items.add()
         item.name = collection_name
         item.uuid = collection_uuid
         export_set.items_index = len(export_set.items) - 1
-        return{'FINISHED'}
+
+        # If the export set preset is Substance Painter Object, enable use_collection by default
+        enum_items = export_set.bl_rna.properties["preset"].enum_items
+        preset_name = enum_items[export_set.preset].name
+        if preset_name == "Substance Painter Object":
+            item.use_collection = True
+
+        return {'FINISHED'}
 
 class Paladin_OT_ExportSetItemRemove(bpy.types.Operator):
     bl_idname = "paladin.export_set_item_remove"

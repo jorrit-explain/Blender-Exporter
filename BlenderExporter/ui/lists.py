@@ -42,7 +42,26 @@ class VIEW3D_UL_ExportList(bpy.types.UIList):
             row.prop(item, "use_path", icon_only=True, icon_value=path_false, emboss=False)
 
         row.prop(item, 'use_origin', icon_only=True, icon=icon_origin, emboss=False)
-        row.prop(item, 'use_collection', icon_only=True, icon_value=icon_collection, emboss=False)
+
+        # lock "use_collection" when Substance Painter Object is active
+        sub = row.row(align=True)
+        preset_name = None
+        try:
+            enum_items = data.bl_rna.properties["preset"].enum_items
+            preset_name = enum_items[data.preset].name
+        except Exception:
+            pass
+
+        # disable user toggle when preset is SPO
+        if preset_name == "Substance Painter Object":
+            sub.enabled = False
+
+        sub.prop(item, 'use_collection',
+                icon_only=True,
+                icon_value=icon_collection,
+                emboss=False,
+                text="")
+
         
 classes = (VIEW3D_UL_ExportList,)
 
