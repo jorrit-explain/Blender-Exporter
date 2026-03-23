@@ -48,6 +48,8 @@ class Paladin_OT_ExportFbx(bpy.types.Operator):
         return self.execute(context)
 
     def execute(self, context):
+        if not hasattr(self, 'alt'):
+            self.ctrl = self.alt = self.shift = False
         export_sets = context.scene.exporter.sets
         preset_path = preset_path_get()
         old_selected = context.selected_objects

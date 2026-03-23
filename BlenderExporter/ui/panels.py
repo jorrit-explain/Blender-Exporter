@@ -32,6 +32,9 @@ class VIEW3D_PT_Paladin_Exporter(bpy.types.Panel):
         col.operator(op_export_fbx.Paladin_OT_ExportFbx.bl_idname, text='Export', icon_value=export_icon).export_selected = False
         col.operator(op_export_fbx.Paladin_OT_ExportFbx.bl_idname, text='Selected', icon_value=export_selection_icon).export_selected = True
 
+        row = layout.row(align=True)
+        row.prop(context.scene.exporter, "auto_export", text="Auto Export on Save")
+
         for index, export_set in enumerate(export_sets):
             if export_set.has_path:
                 icon_path = icon_path_expanded

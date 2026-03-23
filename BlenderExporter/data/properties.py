@@ -36,6 +36,11 @@ class ExportSetProperties(PropertyGroup):
 
 class ExporterSceneProperties(PropertyGroup):
     sets: CollectionProperty(type=ExportSetProperties)
+    auto_export: BoolProperty(
+        name="Auto Export on Save",
+        description="Automatically export when the .blend file is saved",
+        default=False
+    )
 
 classes = (ExportItemProperties, ExportSetProperties, ExporterSceneProperties)
 
