@@ -50,6 +50,15 @@ def exportable_selected(obj):
 
 def exportable_selected_nested(obj):
     return obj.parent and obj.type in export_object_types and obj.select_get() and obj.parent.visible_get()
+
+def exportable_all(obj):
+    return obj.parent == None and obj.type in export_object_types
+
+def exportable_selected_all(obj):
+    return obj.parent == None and obj.type in export_object_types and obj.select_get()
+
+def exportable_selected_nested_all(obj):
+    return obj.parent and obj.type in export_object_types and obj.select_get()
     
 def generate_random_uuid():
     uuid_bits = [random.randint(0, 255) for _ in range(16)]
