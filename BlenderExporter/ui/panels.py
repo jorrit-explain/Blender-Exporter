@@ -20,8 +20,6 @@ class VIEW3D_PT_Paladin_Exporter(bpy.types.Panel):
         icon_affix_true = get_icon('affix_true')
         icon_affix_expanded = get_icon('affix_expanded')
         export_selection_icon = get_icon('export_selection')
-        remove_set = get_icon('remove_set')
-        
         layout = self.layout
         layout.use_property_decorate = False
 
@@ -50,12 +48,12 @@ class VIEW3D_PT_Paladin_Exporter(bpy.types.Panel):
             else:
                 icon_affix = icon_affix_false
             
-            self.draw_set(export_set, index, remove_set, icon_path, icon_affix)
+            self.draw_set(export_set, index, icon_path, icon_affix)
 
         box = self.layout.box()
         box.operator(op_export_sets.Paladin_OT_ExportSetAdd.bl_idname, icon='ADD', text="", emboss=False)
 
-    def draw_set(self, export_set, index, remove_set, icon_path, icon_affix):
+    def draw_set(self, export_set, index, icon_path, icon_affix):
         items = export_set.items
         include = export_set.include
         layout = self.layout.box()
@@ -72,8 +70,9 @@ class VIEW3D_PT_Paladin_Exporter(bpy.types.Panel):
         
         row.prop(export_set, "has_path", icon_only=True, icon_value=icon_path, emboss=False) 
         row.prop(export_set, "has_affixes", icon_only=True, icon_value=icon_affix, emboss=False)
-        
-        row.operator(op_export_sets.Paladin_OT_ExportSetRemove.bl_idname, icon_value=remove_set, text="", emboss=False).index=index
+
+        row.separator()
+        row.operator(op_export_sets.Paladin_OT_ExportSetRemove.bl_idname, icon='TRASH', text="", emboss=False).index=index
 
         col = layout.column(align=True)
         col.use_property_split = True
