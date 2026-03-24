@@ -43,8 +43,8 @@ class VIEW3D_UL_ExportList(bpy.types.UIList):
 
         row.prop(item, 'use_origin', icon_only=True, icon=icon_origin, emboss=False)
 
-        icon_include_hidden = 'HIDE_ON' if item.include_hidden else 'HIDE_OFF'
-        row.prop(item, 'include_hidden', icon_only=True, icon=icon_include_hidden, emboss=False)
+        icon_include_hidden = get_icon('hidden_true') if item.include_hidden else get_icon('hidden_false')
+        row.prop(item, 'include_hidden', icon_only=True, icon_value=icon_include_hidden, emboss=False)
 
         # lock "use_collection" when Substance Painter Object is active
         sub = row.row(align=True)
