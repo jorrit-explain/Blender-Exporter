@@ -19,6 +19,7 @@ class ExportItemProperties(PropertyGroup):
     use_path: BoolProperty(name="Show Path", description="Show or hide 'Export Item Path'", default=False)
     use_origin: BoolProperty(name="Lock Position", description="If locked, objects will not be moved to world '0.0.0'", default=False)
     use_collection: BoolProperty(name="Collection is Object", description="If enabled, the collection is the exported object", default=False)
+    include_hidden: BoolProperty(name="Include Hidden", description="If enabled, hidden objects are also exported", default=False)
     path: StringProperty(name="Path", subtype='DIR_PATH', description="Custom export path for this collection")
     name: StringProperty(description="")
     uuid: StringProperty(description="")
