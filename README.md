@@ -12,7 +12,7 @@
 
 # Description
 
-![image](./images/game-exporter-panel.png)
+![image](./images/game-exporter-panel.png "{width='850'}")
 
 The Blender Exporter assists with the workflow of exporting `.fbx` files. Collections can be defined to be exported, as well as the target path of where objects should be exported to. All configuration is saved within the `.blend` file.
 
@@ -25,7 +25,7 @@ The main export path is where `.fbx` files will be exported to.
 Added collections will be exported on an per object bases within the collection. The exported `.fbx` files will have their object's name as filename. When enabling the `Collection Icon` the whole collection will be exported as a single fbx with it's origin at `000`.
 
 When exporting to multiple folders is required an export path can be defined for each collection:
-![image](./images/game-exporter-collection-settings.png)
+![image](./images/game-exporter-collection-settings.png "{width='750'}")
 
 The `Lock Icon` bool will export every object within a collection at it's position in world space essentially locking it in place when exporting. Default functionality moves the exported objects to `000` in world space.
 
