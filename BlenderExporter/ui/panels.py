@@ -2,6 +2,7 @@ import bpy
 
 from ..operators import op_export_fbx, op_export_sets
 from ..utilities.icons import get_icon
+from ..utilities.general import is_collection_valid
 
 class VIEW3D_PT_Paladin_Exporter(bpy.types.Panel):
     bl_idname = "VIEW3D_PT_Paladin_Exporter_Panel"
@@ -51,7 +52,10 @@ class VIEW3D_PT_Paladin_Exporter(bpy.types.Panel):
             self.draw_set(export_set, index, icon_path, icon_affix)
 
         box = self.layout.box()
-        box.operator(op_export_sets.Paladin_OT_ExportSetAdd.bl_idname, icon='ADD', text="", emboss=False)
+        row = box.row(align=True)
+        row.operator(op_export_sets.Paladin_OT_ExportSetAdd.bl_idname, icon='ADD', text="", emboss=False)
+        row.operator(op_export_sets.Paladin_OT_RepairAllSets.bl_idname, icon='ORPHAN_DATA', text="", emboss=False)
+        row.operator(op_export_sets.Paladin_OT_DiagnoseExporterData.bl_idname, icon='INFO', text="", emboss=False)
 
     def draw_set(self, export_set, index, icon_path, icon_affix):
         items = export_set.items
@@ -111,6 +115,9 @@ class VIEW3D_PT_Paladin_Exporter(bpy.types.Panel):
             op = col.operator(op_export_sets.Paladin_OT_ExportSetItemMove.bl_idname, text="", icon="TRIA_DOWN", emboss=False)
             op.direction = "DOWN"
             op.set_index = index
+
+        if any(not is_collection_valid(item.uuid) for item in items):
+            col.operator(op_export_sets.Paladin_OT_ExportSetCleanupMissing.bl_idname, text="", icon='ORPHAN_DATA', emboss=False).set_index = index
                 
 classes = (VIEW3D_PT_Paladin_Exporter,)
 
