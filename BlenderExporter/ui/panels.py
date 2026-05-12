@@ -36,7 +36,7 @@ class VIEW3D_PT_Paladin_Exporter(bpy.types.Panel):
         for index, export_set in enumerate(export_sets):
             if export_set.has_path:
                 icon_path = icon_path_expanded
-            elif export_set.path:
+            elif export_set.path and export_set.path != '//':
                 icon_path = icon_path_true
             else:
                 icon_path = icon_path_false
@@ -79,7 +79,10 @@ class VIEW3D_PT_Paladin_Exporter(bpy.types.Panel):
 
         if export_set.has_path:
             row = col.row(align=True)
-            row.prop(export_set, "path", text="Path")      
+            row.prop(export_set, "path", text="Path")
+            op = row.operator("paladin.browse_path", text="", icon='FILE_FOLDER', emboss=False)
+            op.set_index = index
+            op.item_index = -1
         if export_set.has_affixes:
             row = col.row(align=True)
             row.prop(export_set, "prefix", text="Affixes")

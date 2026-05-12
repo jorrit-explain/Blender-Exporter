@@ -18,6 +18,7 @@ if "bpy" in locals():
     import imp
     imp.reload(op_export_fbx)
     imp.reload(op_export_sets)
+    imp.reload(op_browse_path)
     imp.reload(panels)
     imp.reload(lists)
     imp.reload(properties)
@@ -27,12 +28,12 @@ if "bpy" in locals():
     print("Reloading")
 
 import bpy
-from .operators import op_export_fbx, op_export_sets
+from .operators import op_export_fbx, op_export_sets, op_browse_path
 from .utilities import icons, general
 from .ui import panels, lists
 from .data import properties, items
 
-modules = (op_export_fbx, op_export_sets, panels, lists, properties, icons)
+modules = (op_export_fbx, op_export_sets, op_browse_path, panels, lists, properties, icons)
 
 @bpy.app.handlers.persistent
 def auto_export_on_save(filepath):
